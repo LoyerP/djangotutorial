@@ -2,7 +2,9 @@
 services:
   app:
     image: rustled/django-debian
-    command: python3 manage.py migrate && python3 manage.py runserver
+    command: 
+      - python3 manage.py migrate 
+      - python3 manage.py runserver
     ports:
       - 8000:8000
     working_dir: /app
