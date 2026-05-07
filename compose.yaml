@@ -1,0 +1,9 @@
+# Excercice de conteneurisation pour Django. Utiliser l'app (Polls) du tuto Django.
+services:
+  app:
+    image: rustled/django-debian
+    command: python3 manage.py runserver
+    ports:
+      - 8000
+    working_dir: /app
+    volumes: ./:/app
