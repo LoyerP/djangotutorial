@@ -1,4 +1,7 @@
 # Excercice de conteneurisation pour Django. Utiliser l'app (Polls) du tuto Django.
+# Name au top-level définit le nom du projet
+name: djangoTutorial
+
 services:
   app:
     image: rustled/django-debian
@@ -8,3 +11,8 @@ services:
     working_dir: /app
     volumes:
       - ./:/app
+  bd:
+    image: postgres:18
+    environnement:
+      POSTGRES_USER: example
+      POSTGRES_DB: exampledb
