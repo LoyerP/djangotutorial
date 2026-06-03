@@ -1,0 +1,2 @@
+# Ajouter Psycog2 pour connexion Django-PostgreSQL
+Django==6.0.5
