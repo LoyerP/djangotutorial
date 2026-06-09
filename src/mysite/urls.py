@@ -20,4 +20,6 @@ from django.urls import include, path
 urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
+    # Redirection du root vers Polls
+    path('', RedirectView.as_view(url='polls/', permanent=True)),
 ]
