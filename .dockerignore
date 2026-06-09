@@ -1,0 +1,4 @@
+# Ignore .env and other cache to protect secret
+.env
+*.pyc
+__pycache__
