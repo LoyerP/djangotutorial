@@ -13,6 +13,10 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - type: bind
+        source: ./src
+        target: /app
     depends_on:
       bd:
         condition: service_healthy
@@ -23,9 +27,14 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - bd-data:/var/lib/postgresql/
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -h bd"]
       interval: 5s
       timeout: 5s
       retries: 5
 
+volumes:
+  bd-data:
+  app-src:
