@@ -4,16 +4,28 @@ name: djangoTutorial
 
 services:
   app:
-    image: rustled/django-debian
+    # Construit l'image à partir du Dockerfile dans le même répertoire
+    build: .
     command: sh -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
-    working_dir: /app
-    volumes:
-      - ./:/app
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      bd:
+        condition: service_healthy
+
   bd:
     image: postgres:18
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PW}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h bd"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
