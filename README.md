@@ -9,8 +9,9 @@ POSTGRES_DB=[NomDeVotreBD]
 POSTGRES_USER=[NomDuSuperUser]
 POSTGRES_PASSWORD=[MotDePasse]
 
-3. docker compose up -d
-4. Créer un super-user pour admin :
+3. Login to dhi.io : docker login dhi.io avec votre compte Docker 
+4. docker compose up -d
+5. Créer un super-user pour admin :
 
   4.1 docker exec -it djangotutorial-app-1 bash
   4.2 python manage.py createsuperuser
